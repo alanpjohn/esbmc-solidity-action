@@ -23,9 +23,10 @@ jobs:
         env:
           RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/esbmc-solidity-gh-action:$RELEASE_VERSION .
-          docker tag ${{ secrets.DOCKER_USERNAME }}/esbmc-solidity-gh-action:$RELEASE_VERSION ${{ secrets.DOCKER_USERNAME  }}/esbmc-solidity-gh-action:latest
+          docker pull alanjohn/esbmc-solidity-gh-action:latest 
+          docker build -t alanjohn/esbmc-solidity-gh-action:$RELEASE_VERSION .
+          docker tag alanjohn/esbmc-solidity-gh-action:$RELEASE_VERSION alanjohn/esbmc-solidity-gh-action:latest
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME  }}/esbmc-solidity-gh-action:$RELEASE_VERSION
-          docker push ${{ secrets.DOCKER_USERNAME  }}/esbmc-solidity-gh-action:latest
+          docker push alanjohn/esbmc-solidity-gh-action:$RELEASE_VERSION
+          docker push alanjohn/esbmc-solidity-gh-action:latest
