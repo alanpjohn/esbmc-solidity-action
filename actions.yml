@@ -5,5 +5,5 @@ description: Github action for running ESBMC Solidity to
 
 runs:
   using: Docker
-  image: docker://alanjohn/esbmc-solidity-gh-action
+  image: docker.io/alanjohn/esbmc-solidity-gh-action:latest
   

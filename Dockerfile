@@ -18,8 +18,18 @@ WORKDIR esbmc/build
 RUN cmake ..  -GNinja -DBUILD_TESTING=On -DENABLE_REGRESSION=On -DClang_DIR=$PWD/../../clang11 -DLLVM_DIR=$PWD/../../clang11 -DBUILD_STATIC=On -DZ3_DIR=$PWD/../../z3 -DENABLE_SOLIDITY_FRONTEND=On -DCMAKE_INSTALL_PREFIX:PATH=$PWD/../../release
 RUN cmake --build . && ninja install
 
-FROM alpine:latest
+FROM ethereum/solc:0.8.20-alpine
 
-COPY --from=builder /release/bin/esbmc ./
+RUN apk add bash
 
-CMD ["./esbmc","--help"]
+RUN wget https://github.com/ethereum/solidity/releases/download/v0.8.20/solc-static-linux -O /usr/bin/solc && chmod +x /usr/bin/solc
+
+RUN wget https://github.com/mikefarah/yq/releases/download/v4.2.0/yq_linux_amd64 -O /usr/bin/yq && chmod +x /usr/bin/yq
+
+COPY --from=builder /release/bin/esbmc /usr/bin/esbmc
+COPY ./entrypoint.sh ./
+RUN chmod +x ./entrypoint.sh
+
+WORKDIR /github/workspace
+
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]

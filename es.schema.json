@@ -8,8 +8,22 @@
             "description" : "Solidity contracts to run ESBMC Solidity frontend",
             "type" : "array",
             "items" : {
-                "description": "file path",
-                "type" : "string"
+                "description": "file data",
+                "type" : "object",
+                "properties" : {
+                    "filepath" : {
+                        "type" : "string",
+                        "description" : "filepath"
+                    },
+                    "functions" : {
+                        "type" : "array",
+                        "description" : "function to verify",
+                        "items" : {
+                            "description":"function name",
+                            "type": "string"
+                        }
+                    }
+                }
             }
         }
     }
