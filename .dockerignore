@@ -1,0 +1,10 @@
+.github/*
+actions.yml
+es.schema.json
+es.yml
+test*
+yq
+output.log
+error.log
+es.yml
+ast

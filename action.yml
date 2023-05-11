@@ -4,6 +4,6 @@ description: Github action for running ESBMC Solidity to
   Requires `es.yml` configuration file
 
 runs:
-  using: Docker
-  image: docker.io/alanjohn/esbmc-solidity-gh-action:latest
+  using: docker
+  image: docker://alanjohn/esbmc-solidity-gh-action:latest
   
