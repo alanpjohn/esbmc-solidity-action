@@ -1,0 +1,9 @@
+name: ESBMC Solidity Github Action
+description: Github action for running ESBMC Solidity to
+  perform static analysis of Solidity contracts. \n
+  Requires `es.yml` configuration file
+
+runs:
+  using: Docker
+  image: Dockerfile 
+  
